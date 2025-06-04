@@ -2,6 +2,8 @@
 
 A comprehensive calculator web application built with React, TypeScript, and Tailwind CSS, featuring multiple calculation modes, real-time unit conversions, and a modern user interface.
 
+Currently deployed to https://calculatorpro.xyz/.
+
 ## ✨ Features
 
 ### 🧮 Multiple Calculator Modes

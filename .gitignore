@@ -49,3 +49,4 @@ logs
 # Misc
 .DS_Store
 Thumbs.db 
+.pem
