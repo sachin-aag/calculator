@@ -3,6 +3,7 @@ import { Button } from "../components/ui/button"
 import { Card } from "../components/ui/card"
 import { Copy } from "lucide-react"
 import { toast } from "sonner"
+import { logEvent } from "../lib/analytics"
 
 export function SimpleCalculator() {
   const [display, setDisplay] = useState("0")
@@ -61,6 +62,7 @@ export function SimpleCalculator() {
     try {
       await navigator.clipboard.writeText(display)
       toast.success("Result copied to clipboard!")
+      logEvent('Calculator', 'Copy', 'Copy result to clipboard')
     } catch (err) {
       toast.error("Failed to copy result")
     }
@@ -73,12 +75,14 @@ export function SimpleCalculator() {
     } else {
       setDisplay(display === "0" ? num : display + num)
     }
+    logEvent('Calculator', 'Number Input', num)
   }
 
   const handleOperation = (op: string) => {
     setOperation(op)
     setPreviousValue(parseFloat(display))
     setNewNumber(true)
+    logEvent('Calculator', 'Operation', op)
   }
 
   const handleEqual = () => {
@@ -109,6 +113,7 @@ export function SimpleCalculator() {
     setPreviousValue(null)
     setOperation(null)
     setNewNumber(true)
+    logEvent('Calculator', 'Calculate', `${previousValue} ${operation} ${current} = ${result}`)
   }
 
   const handleClear = () => {
@@ -116,6 +121,7 @@ export function SimpleCalculator() {
     setPreviousValue(null)
     setOperation(null)
     setNewNumber(true)
+    logEvent('Calculator', 'Clear', 'Clear calculator')
   }
 
   const buttons = [
